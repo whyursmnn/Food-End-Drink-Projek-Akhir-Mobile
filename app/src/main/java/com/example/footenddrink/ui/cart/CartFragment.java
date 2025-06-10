@@ -8,11 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.footenddrink.R;
 import com.example.footenddrink.data.CartManager;
@@ -49,9 +49,9 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemActi
 
         btnCheckout.setOnClickListener(v -> {
             if (cartManager.getCartItemCount() > 0) {
-                Toast.makeText(getContext(), "Proses checkout...", Toast.LENGTH_SHORT).show();
-                cartManager.clearCart();
-                updateUI();
+
+                NavHostFragment.findNavController(this).navigate(R.id.action_cartFragment_to_orderSummaryFragment);
+
             } else {
                 Toast.makeText(getContext(), "Keranjang Anda kosong!", Toast.LENGTH_SHORT).show();
             }

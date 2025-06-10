@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
 
     private static final String BASE_URL = "https://api.spoonacular.com/";
     private static final String API_KEY = "a7e7c9b6d0f54933894da9f2e5203325";
-    private static final int ITEMS_PER_PAGE = 30;
+    private static final int ITEMS_PER_PAGE = 3;
     private static final int VISIBLE_THRESHOLD = 5;
 
     private int currentOffset = 0;
@@ -96,7 +96,10 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
         searchViewMenu = view.findViewById(R.id.search_view_menu);
 
 
-        Glide.with(this).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+
+        if (ivBanner != null && getContext() != null) {
+            Glide.with(requireContext()).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+        }
 
 
 
@@ -152,7 +155,6 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
         });
 
 
-
         executorService = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
 
@@ -184,7 +186,6 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
         }
 
         isLoading = true;
-
 
         if (!isNetworkAvailable()) {
             progressBar.setVisibility(View.GONE);
@@ -218,6 +219,13 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
                         isLoading = false;
                         progressBar.setVisibility(View.GONE);
 
+
+                        if (!isAdded() || getView() == null) {
+                            Log.w("HomeFragment", "Fragment not attached or view destroyed after API response, skipping banner load.");
+                            return;
+                        }
+
+
                         if (response.isSuccessful() && response.body() != null && response.body().getMenuItems() != null) {
                             List<FoodDrinkItem> newItems = response.body().getMenuItems();
                             int totalResults = response.body().getTotalMenuItems();
@@ -231,21 +239,26 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
                             rvItems.setVisibility(View.VISIBLE);
 
 
-                            if (offset == 0 && !newItems.isEmpty() && newItems.get(0).getImageUrl() != null && !newItems.get(0).getImageUrl().trim().isEmpty()) {
-                                Glide.with(HomeFragment.this)
-                                        .load(newItems.get(0).getImageUrl())
-                                        .placeholder(R.drawable.ic_placeholder)
-                                        .error(R.drawable.ic_placeholder)
-                                        .into(ivBanner);
-                            } else if (offset == 0 && newItems.isEmpty()) {
 
-                                Glide.with(HomeFragment.this).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+                            if (offset == 0 && ivBanner != null && getContext() != null) {
+                                if (!newItems.isEmpty() && newItems.get(0).getImageUrl() != null && !newItems.get(0).getImageUrl().trim().isEmpty()) {
+                                    Glide.with(requireContext())
+                                            .load(newItems.get(0).getImageUrl())
+                                            .placeholder(R.drawable.ic_placeholder)
+                                            .error(R.drawable.ic_error)
+                                            .into(ivBanner);
+                                } else if (newItems.isEmpty()) {
+                                    Glide.with(requireContext()).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+                                }
+                            } else if (offset == 0 && ivBanner != null && getContext() != null) {
+                                Glide.with(requireContext()).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
                             }
+
 
 
                             if (adapter.getItemCount() >= totalResults || newItems.size() < number) {
                                 hasMoreData = false;
-                                Log.d("HomeFragment", "No more data to load. Total items in adapter: " + adapter.getItemCount() + ", API total: " + totalResults);
+                                Log.d("HomeFragment", "API mengembalikan kurang dari yang diminta, mengasumsikan tidak ada data lagi. Total di adapter: " + adapter.getItemCount() + ", API total: " + totalResults);
                             } else {
                                 hasMoreData = true;
                                 Log.d("HomeFragment", "More data available. Current items in adapter: " + adapter.getItemCount() + ", API total: " + totalResults);
@@ -253,7 +266,7 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
 
                             if (offset == 0 && newItems.isEmpty()) {
                                 tvErrorMessage.setVisibility(View.VISIBLE);
-                                tvErrorMessage.setText("Tidak ada hasil untuk '" + query + "'.");
+                                tvErrorMessage.setText("Tidak ada hasil untuk '" + query + "' dengan gambar yang valid.");
                                 btnRetry.setVisibility(View.VISIBLE);
                             } else {
                                 tvErrorMessage.setVisibility(View.GONE);
@@ -279,7 +292,11 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
                             if (adapter.getItemCount() == 0) {
                                 loadProductsFromSharedPreferences();
                             }
-                            Glide.with(HomeFragment.this).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+
+                            if (isAdded() && ivBanner != null && getContext() != null) {
+                                Glide.with(requireContext()).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+                            }
+
                         }
                     });
                 }
@@ -289,7 +306,13 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
                     mainHandler.post(() -> {
                         isLoading = false;
                         progressBar.setVisibility(View.GONE);
-                        Glide.with(HomeFragment.this).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+
+
+                        if (isAdded() && ivBanner != null && getContext() != null) {
+                            Glide.with(requireContext()).load(R.drawable.img_banner_fried_chicken).into(ivBanner);
+                        }
+
+
                         Log.e("HomeFragment", "Network or API call failure: " + t.getMessage(), t);
                         tvErrorMessage.setVisibility(View.VISIBLE);
                         btnRetry.setVisibility(View.VISIBLE);

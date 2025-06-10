@@ -8,36 +8,37 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.footenddrink.ui.home.HomeFragment"
-        android:label="Menu McDonald's"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
-    </fragment>
+        android:label="Menu"
+        tools:layout="@layout/fragment_home"></fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.footenddrink.ui.settings.SettingsFragment"
         android:label="Pengaturan"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_settingsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
+        tools:layout="@layout/fragment_settings">
+
     </fragment>
 
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.footenddrink.ui.cart.CartFragment"
         android:label="Keranjang"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
+
         <action
-            android:id="@+id/action_cartFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_cartFragment_to_orderSummaryFragment"
+            app:destination="@id/orderSummaryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/orderSummaryFragment"
+        android:name="com.example.footenddrink.ui.ordersummary.OrderSummaryFragment"
+        android:label="Ringkasan Pesanan"
+        tools:layout="@layout/fragment_order_summary" />
+
 </navigation>
