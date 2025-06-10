@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements FoodDrinkAdapter.OnItemCli
 
     private static final String BASE_URL = "https://api.spoonacular.com/";
     private static final String API_KEY = "a7e7c9b6d0f54933894da9f2e5203325";
-    private static final int ITEMS_PER_PAGE = 3;
+    private static final int ITEMS_PER_PAGE = 30;
     private static final int VISIBLE_THRESHOLD = 5;
 
     private int currentOffset = 0;
