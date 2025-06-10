@@ -38,7 +38,7 @@ Aplikasi ini dibangun menggunakan **Android Studio** dengan bahasa pemrograman *
 * **Pengambilan Data:** Data menu diambil dari [Spoonacular API](https://spoonacular.com/food-api/docs) menggunakan library **Retrofit** dan **Gson**. Paginasi (infinite scrolling) diimplementasikan untuk memuat data secara bertahap.
 * **Autentikasi:** Sistem login dan pendaftaran sederhana menggunakan **SharedPreferences** untuk menyimpan kredensial akun secara lokal.
 * **Keranjang Belanja:** Data keranjang dikelola oleh kelas `CartManager` (singleton) dan disimpan secara persisten menggunakan **SharedPreferences**.
-* **Integrasi Google Sheets:** Data pesanan dikirim ke Google Sheets melalui API Web yang dibangun dengan **Google Apps Script**.
+* **Integrasi Google Sheets:** Data pesanan dikirim ke Google Sheets melalui API Web yang dibangun dengan **Google Apps Script[Link](https://docs.google.com/spreadsheets/d/1kGki62B4qx8pBvt3hIDgoccXTwc09ksiRgpZpW-pm1c/edit?usp=sharing) .
 * **Tema:** Aplikasi mendukung tema terang dan gelap, preferensi disimpan di **SharedPreferences** dan diterapkan saat *Activity* diluncurkan.
 * **Penanganan Offline:** Aplikasi dapat menampilkan data yang di-*cache* dari `SharedPreferences` sebagai *fallback* jika tidak ada koneksi internet atau panggilan API gagal.
 
