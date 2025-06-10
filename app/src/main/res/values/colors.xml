@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="app_primary_red">#FF4D4D</color> <color name="app_orange">#FFA500</color> <color name="app_light_bg">#F8F8F8</color> <color name="app_dark_text">#2E2E2E</color> <color name="app_light_text">#7F7F7F</color> <color name="app_rating_star">#FFD700</color> <color name="app_chip_bg">#EDEDED</color> <color name="app_delivery_time_bg">#30000000</color> <color name="mc_red">#DA291C</color>
+    <color name="mc_yellow">#FFC72C</color>
+    <color name="mc_dark_yellow">#F2A900</color>
+    <color name="mc_white">#FFFFFF</color>
+    <color name="mc_light_gray">#F0F0F0</color>
+    <color name="mc_medium_gray">#CCCCCC</color>
+    <color name="mc_dark_gray">#333333</color>
+    <color name="mc_black">#000000</color>
+
+
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+
+
+    <color name="dark_theme_background">#121212</color> <color name="dark_theme_card_bg">#1E1E1E</color> <color name="dark_theme_text_primary">#FFFFFF</color> <color name="dark_theme_text_secondary">#BBBBBB</color> <color name="dark_theme_on_primary">#000000</color> <color name="purple_200">#FFBB86FC</color>
+
+
+
+
+
+</resources>
+

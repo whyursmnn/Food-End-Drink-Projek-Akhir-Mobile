@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.FootEndDrink_Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/app_primary_red</item>
+        <item name="colorPrimaryVariant">@color/mc_red</item>
+        <item name="colorOnPrimary">@color/mc_white</item>
+        <item name="colorSecondary">@color/app_orange</item>
+        <item name="colorSecondaryVariant">@color/mc_dark_yellow</item>
+        <item name="colorOnSecondary">@color/dark_theme_on_primary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:textColorPrimary">@color/dark_theme_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_theme_text_secondary</item>
+        <item name="android:background">@color/dark_theme_background</item>
+        <item name="android:windowBackground">@color/dark_theme_background</item>
+        <item name="cardViewStyle">@style/CardView.AppDark</item>
+    </style>
+
+    <style name="Theme.FootEndDrink" parent="Theme.FootEndDrink_Dark" />
+
+    <style name="CardView.AppDark" parent="CardView">
+        <item name="cardBackgroundColor">@color/dark_theme_card_bg</item>
+    </style>
+</resources>
